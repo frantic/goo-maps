@@ -3,7 +3,26 @@ require File.expand_path(File.join(File.dirname(__FILE__), "../spec_helper"))
 describe TilesDownloader do
   let (:url_builder) { double :get_url => "http://maps.google.com/" }
   let (:fetcher)     { double :fetch => "SOME DATA" }
-  let (:downloader)  { TilesDownloader.new url_builder, fetcher }
+  let (:storage)     { double :exists? => false }
+  let (:downloader)  { TilesDownloader.new url_builder, fetcher, storage }
 
-  it "downloads a tile by given x, y, z and type into specified folder"
+  it "downloads a tile" do
+    url_builder.should_receive :get_url
+    fetcher.should_receive :fetch
+    storage.should_receive :put
+    downloader.download TileInfo.new(1, 1, 1, :sattelite)
+  end
+  
+  it "doesn't download tile if it is already downloaded" do
+    storage.stub(:exists?).and_return(true)
+    fetcher.should_not_receive :fetch
+    downloader.download TileInfo.new(1, 1, 1, :sattelite)
+  end
+  
+  it "downloads range of tiles" do
+    left_top = {x: 1, y: 1}
+    right_bottom = {x: 5, y: 5}
+    storage.should_receive(:put).exactly(25).times
+    downloader.download_range left_top, right_bottom, 7, :sattelite
+  end
 end

@@ -7,5 +7,7 @@ require 'tiles_downloader'
 require 'tiles_storage'
 
 module GooMaps
-  
+  def self.create_downloader(dir)
+    TilesDownloader.new(UrlBuilder.new, Fetcher.new, TilesStorage.new(dir))
+  end
 end
