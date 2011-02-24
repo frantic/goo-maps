@@ -1,5 +1,4 @@
 require 'net/http'
-require 'pp'
 
 module GooMaps
   class Fetcher
