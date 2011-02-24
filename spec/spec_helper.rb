@@ -1,4 +1,6 @@
 require File.join(File.dirname(__FILE__), "../lib/goo_maps.rb")
+require 'FileUtils'
+
 include GooMaps
 
 def temp_folder
