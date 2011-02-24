@@ -5,7 +5,7 @@ describe Fetcher do
   
   it "fetches given url" do
     # Using proxy for people without direct Internet connection (like me)
-    fetcher.use_proxy ENV['http_proxy']
+    fetcher.use_proxy ENV['http_proxy'] if ENV['http_proxy']
     fetcher.fetch("http://google.com/").should_not be_empty
   end
   
