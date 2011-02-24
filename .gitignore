@@ -1,0 +1,11 @@
+.DS_Store
+
+*.tmproj
+tmtags
+
+coverage
+rdoc
+pkg
+
+.bundle
+.rspec
