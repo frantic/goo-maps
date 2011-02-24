@@ -22,8 +22,8 @@ module GooMaps
   private
   
     def format_file_name(tile_info)
-      x, y, z, s = tile_info.x, tile_info.y, tile_info.z, tile_info.surface[0]
-      "tile_#{s}_#{x}_#{y}_#{z}"
+      x, y, z, s = tile_info.x, tile_info.y, tile_info.z, tile_info.surface[0].upcase
+      "#{s}-#{x}-#{y}-#{z}.png"
     end
   end
 end

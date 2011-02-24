@@ -16,8 +16,8 @@ describe TilesStorage do
   
   it "names file by x, y, z coordinates and tile type" do
     x, y, z = 1, 2, 3
-    storage.send(:format_file_name, sattelite_tile).should == "tile_s_10_12_7"
-    storage.send(:format_file_name, labels_tile).should == "tile_l_10_12_7"
+    storage.send(:format_file_name, sattelite_tile).should == "S-10-12-7.png"
+    storage.send(:format_file_name, labels_tile).should == "L-10-12-7.png"
   end
   
   it "puts tile's content to file" do
