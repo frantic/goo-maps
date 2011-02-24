@@ -11,36 +11,34 @@ describe TilesStorage do
   end
   
   let (:storage) { TilesStorage.new temp_folder }
+  let (:sattelite_tile) { TileInfo.new 10, 12, 7, :sattelite }
+  let (:labels_tile) { TileInfo.new 10, 12, 7, :labels }
   
   it "names file by x, y, z coordinates and tile type" do
     x, y, z = 1, 2, 3
-    storage.send(:format_file_name, x, y, z, :sattelite).should == "tile_s_1_2_3"
-    storage.send(:format_file_name, x, y, z, :label).should == "tile_l_1_2_3"
+    storage.send(:format_file_name, sattelite_tile).should == "tile_s_10_12_7"
+    storage.send(:format_file_name, labels_tile).should == "tile_l_10_12_7"
   end
   
   it "puts tile's content to file" do
-    x, y, z, t = 1, 2, 3, :sattelite
-    file_name = File.join temp_folder, storage.send(:format_file_name, x, y, z, t)
-    storage.put x, y, z, t, "some content"
+    file_name = File.join temp_folder, storage.send(:format_file_name, sattelite_tile)
+    storage.put sattelite_tile, "some content"
     File.exists?(file_name).should be_true
   end
   
   it "gets tile's content if it exists" do
-    x, y, z, t = 11, 12, 3, :sattelite
-    storage.put x, y, z, t, "testing"
-    storage.get(x, y, z, t).should == "testing"
+    storage.put sattelite_tile, "testing"
+    storage.get(sattelite_tile).should == "testing"
   end
   
   describe "#exists?" do
     it "returns false if there is no such tile" do
-      x, y, z, t = 101, 102, 3, :sattelite
-      storage.exists?(x, y, z, t).should be_false
+      storage.exists?(labels_tile).should be_false
     end
     
     it "returns true if that tile is stored" do
-      x, y, z, t = 111, 112, 3, :sattelite
-      storage.put x, y, z, t, "some content"
-      storage.exists?(x, y, z, t).should be_true
+      storage.put sattelite_tile, "some content"
+      storage.exists?(sattelite_tile).should be_true
     end
   end
 end

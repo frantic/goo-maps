@@ -5,24 +5,25 @@ module GooMaps
       @folder = folder
     end
     
-    def put(x, y, z, tile_type, data)
-      file_name = File.join(@folder, format_file_name(x, y, z, tile_type))
+    def put(tile_info, data)
+      file_name = File.join(@folder, format_file_name(tile_info))
       File.open(file_name, "wb") { |f| f << data }
     end
     
-    def get(x, y, z, tile_type)
-      file_name = File.join(@folder, format_file_name(x, y, z, tile_type))
+    def get(tile_info)
+      file_name = File.join(@folder, format_file_name(tile_info))
       File.open(file_name, "rb") { |f| return f.read }
     end
     
-    def exists?(x, y, z, tile_type)
-      File.exists? File.join(@folder, format_file_name(x, y, z, tile_type))
+    def exists?(tile_info)
+      File.exists? File.join(@folder, format_file_name(tile_info))
     end
     
   private
   
-    def format_file_name(x, y, z, tile_type)
-      "tile_#{tile_type[0]}_#{x}_#{y}_#{z}"
+    def format_file_name(tile_info)
+      x, y, z, s = tile_info.x, tile_info.y, tile_info.z, tile_info.surface[0]
+      "tile_#{s}_#{x}_#{y}_#{z}"
     end
   end
 end
