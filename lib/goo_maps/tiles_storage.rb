@@ -18,12 +18,10 @@ module GooMaps
     def exists?(tile_info)
       File.exists? File.join(@folder, format_file_name(tile_info))
     end
-    
-  private
   
     def format_file_name(tile_info)
       x, y, z, s = tile_info.x, tile_info.y, tile_info.z, tile_info.surface[0].upcase
-      "#{s}-#{x}-#{y}-#{z}.png"
+      "#{s}-#{z}-#{x}-#{y}.png"
     end
   end
 end

@@ -16,12 +16,12 @@ describe TilesStorage do
   
   it "names file by x, y, z coordinates and tile type" do
     x, y, z = 1, 2, 3
-    storage.send(:format_file_name, sattelite_tile).should == "S-10-12-7.png"
-    storage.send(:format_file_name, labels_tile).should == "L-10-12-7.png"
+    storage.format_file_name(sattelite_tile).should == "S-7-10-12.png"
+    storage.format_file_name(labels_tile).should == "L-7-10-12.png"
   end
   
   it "puts tile's content to file" do
-    file_name = File.join temp_folder, storage.send(:format_file_name, sattelite_tile)
+    file_name = File.join temp_folder, storage.format_file_name(sattelite_tile)
     storage.put sattelite_tile, "some content"
     File.exists?(file_name).should be_true
   end
