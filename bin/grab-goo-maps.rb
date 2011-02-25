@@ -1,7 +1,7 @@
 #!/usr/local/bin/ruby
 
 require File.expand_path(File.join(File.dirname(__FILE__), "../lib/goo_maps.rb"))
-require 'FileUtils'
+require 'fileutils'
 require 'mini_magick'
 require 'progressbar'
 

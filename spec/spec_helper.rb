@@ -1,5 +1,5 @@
 require File.join(File.dirname(__FILE__), "../lib/goo_maps.rb")
-require 'FileUtils'
+require 'fileutils'
 
 include GooMaps
 
