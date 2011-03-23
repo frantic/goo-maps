@@ -1,6 +1,7 @@
 $LOAD_PATH.unshift File.join(File.dirname(__FILE__), 'goo_maps')
 
 require 'tile_info'
+require 'tiles_range'
 require 'url_builder'
 require 'fetcher'
 require 'tiles_downloader'

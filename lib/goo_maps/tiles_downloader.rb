@@ -13,8 +13,8 @@ module GooMaps
       @storage.put tile_info, data
     end
     
-    def download_range(left_top, right_bottom, z, surfaces)
-      TileInfo.range(left_top, right_bottom, z, surfaces) { |t| download t }
+    def download_range(tiles_range)
+      tiles_range.each { |t| download t }
     end
   end
 end

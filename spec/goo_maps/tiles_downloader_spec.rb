@@ -20,9 +20,8 @@ describe TilesDownloader do
   end
   
   it "downloads range of tiles" do
-    left_top = {x: 1, y: 1}
-    right_bottom = {x: 5, y: 5}
     storage.should_receive(:put).exactly(25).times
-    downloader.download_range left_top, right_bottom, 7, [:sattelite]
+    tiles_range = TilesRange.new 1, 1, 5, 5, 7, [:sattelite]
+    downloader.download_range tiles_range
   end
 end
